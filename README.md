@@ -3,6 +3,15 @@
 Ekranda yasayan, piksel-art bir su damlasi maskotu ile su icmeyi
 hatirlatan hafif bir masaustu araci (TBH: Task Bar Hero mantiginda).
 
+## Ekran Goruntuleri
+
+> Asagidaki goruntuleri gercek uygulamadan alinan ss'lerle
+> guncelleyebilirsin: `docs/img/` klasorune koy, asagidaki yollari guncelle.
+
+| Widget (mutlu) | Widget (susamis) | Ayarlar |
+|:-:|:-:|:-:|
+| *(docs/img/widget_happy.png)* | *(docs/img/widget_thirsty.png)* | *(docs/img/settings.png)* |
+
 ## Ozellikler
 
 - **Masaustu widget'i**: Kucuk, cerceve/baslik cubugu olmayan, seffaf
