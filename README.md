@@ -5,12 +5,9 @@ hatirlatan hafif bir masaustu araci (TBH: Task Bar Hero mantiginda).
 
 ## Ekran Goruntuleri
 
-> Asagidaki goruntuleri gercek uygulamadan alinan ss'lerle
-> guncelleyebilirsin: `docs/img/` klasorune koy, asagidaki yollari guncelle.
+**Maskot halleri** — mutludan susamisliga, kusuma kadar:
 
-| Widget (mutlu) | Widget (susamis) | Ayarlar |
-|:-:|:-:|:-:|
-| *(docs/img/widget_happy.png)* | *(docs/img/widget_thirsty.png)* | *(docs/img/settings.png)* |
+![Maskot halleri](docs/img/mascot_states.png)
 
 ## Ozellikler
 
