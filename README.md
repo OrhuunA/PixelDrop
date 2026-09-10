@@ -1,135 +1,241 @@
 # PixelDrop
 
-Ekranda yasayan, piksel-art bir su damlasi maskotu ile su icmeyi
-hatirlatan hafif bir masaustu araci (TBH: Task Bar Hero mantiginda).
+[English](README.en.md)
 
-## Ekran Goruntuleri
+![Lisans](https://img.shields.io/github/license/OrhuunA/PixelDrop)
+![Platform](https://img.shields.io/badge/platform-Windows-0078D6)
+![Python](https://img.shields.io/badge/python-3.9%2B-3776AB)
+![Son sürüm](https://img.shields.io/github/v/release/OrhuunA/PixelDrop)
+![İndirme](https://img.shields.io/github/downloads/OrhuunA/PixelDrop/total)
 
-**Maskot halleri** — mutludan susamisliga, kusuma kadar:
+Ekranda yaşayan, piksel-art bir su damlası maskotuyla su içmeyi hatırlatan
+hafif bir Windows masaüstü aracı (TBH: Task Bar Hero mantığında).
+
+## Ekran görüntüleri
+
+Maskotun halleri — mutludan susamışlığa:
 
 ![Maskot halleri](docs/img/mascot_states.png)
 
-## Ozellikler
+> Masaüstü, ayarlar penceresi ve 7 günlük grafik ekran görüntüleri ile
+> kısa bir tanıtım GIF'i eklenecek (bkz. [yol haritası](pixeldropyolharitasi.md)).
 
-- **Masaustu widget'i**: Kucuk, cerceve/baslik cubugu olmayan, seffaf
-  arka planli, her zaman en ustte duran bir karakter. Zaman gectikce
-  maskotun ifadesi degisir: mutlu -> notr -> susamis -> acil (kirmizi,
-  yanip soner). Su icince tekrar mutlu olur ve kisa bir "sevinme"
+## İndir
+
+**[En son sürümü indir (GitHub Releases)](https://github.com/OrhuunA/PixelDrop/releases/latest)**
+
+> **Not:** İmzasız `.exe` dosyaları Windows SmartScreen, Chrome ya da
+> Windows Defender tarafından bazen yanlışlıkla "zararlı yazılım" olarak
+> işaretlenebiliyor — bu, PyInstaller ile derlenen hemen her uygulamada
+> karşılaşılan bilinen bir durum ve kodda gerçek bir kötü amaçlı davranış
+> olduğu anlamına gelmiyor. Ayrıntı ve çözüm yolları için aşağıdaki
+> [SmartScreen / antivirüs uyarısı](#windows-smartscreen-ve-antivirüs-uyarısı)
+> bölümüne bak.
+
+İndirmek istemiyorsan, kaynak koddan çalıştırmak için aşağıdaki
+[Çalıştırma (geliştirme)](#çalıştırma-geliştirme) bölümüne bak.
+
+## Özellikler
+
+- **Masaüstü widget'i**: Küçük, çerçeve/başlık çubuğu olmayan, şeffaf
+  arka planlı, her zaman en üstte duran bir karakter. Zaman geçtikçe
+  maskotun ifadesi değişir: mutlu → nötr → susamış → acil (kırmızı,
+  yanıp söner). Su içince tekrar mutlu olur ve kısa bir "sevinme"
   animasyonu yapar.
-- **Surukle-birak**: Karaktere tikla-surukle ile ekranda istedigin yere
-  tasi (konum kaydedilir). Tek tiklama (suruklemeden) = "su ictim".
-- **Fareyle uzerine gelince** sag ust kosede uc simge belirir: **💤**
-  bildirimi 5 dakika erteler, **⚙** kucuk bir ayarlar penceresi acar
-  (aralik, boyut, gunluk hedef, duraklat, otomatik duraklama, ses,
-  baslangicta calistir - hepsi widget'tan, tepsiye gitmeden), **✕**
-  widget'i gizler (tepsi menusunden "Widget'i goster" ile geri
-  getirilebilir). Aralarinda yanlislikla birbirine basmayi onlemek icin
-  bosluk var; ustelik hangisine daha yakin tiklandiysa o secilir.
-- **Kademeli kuruma**: karakterin rengi su icmedikce yavas yavas canli
-  mavi-mutludan soluk/kirmizimsi-kurumusa gecer (parlaklik/nem izlenimi
-  de azalir), aniden degil surekli/akici bir gecisle.
-- **Ilerleme cubugu**: Widget'in altinda, bir sonraki hatirlamaya kalan
-  sureyi gosteren kucuk bir cubuk + geri sayim yazisi.
-- **Gunluk hedef + seri (streak)**: Widget'te, geri sayimin ustunde
-  gunluk kac bardak icildigini gosteren kucuk bardak simgeleri satiri
-  (dolu/mavi = icildi, bos/soluk cerceve = kaldi) - hedef 8'den
-  buyukse yer kisitindan dolayi "3/10 bardak" seklinde metne doner.
-  Hedefe (varsayilan 8 bardak, ayarlardan degistirilebilir) ulasinca
-  karakter daha uzun/enerjik bir sekilde "sevinir" ve ayrica bir
-  kutlama bildirimi gelir. Gece yarisini gectiginde (uygulama acik
-  kalsa bile) sayaç otomatik sifirlanir, onceki gun hedefe ulasildiysa
-  seri (kac gun ust uste hedefi tuttugun) bir artar, tutulmadiysa
-  sifirlanir. Seri sayisi ayarlar penceresinde gorunur.
-- **Bosta/uzaktayken otomatik duraklama**: Klavye/fare 10 dakikadir
-  kullanilmadiysa hatirlatici "uzakta" durumuna gecip otomatik
-  duraklar (bildirim gelmez); geri donunce sayac sifirlanip normal
-  akisina devam eder, boylece bilgisayardan uzaktayken bos yere
-  bildirim birikmez. Ayarlardan kapatilabilir.
-- **Bildirimden hizli erteleme**: Widget uzerindeki 💤 simgesi ya da
-  tepsi menusundeki "5 dk ertele" ile bir sonraki hatirlatmayi 5 dakika
+- **Sürükle-bırak**: Karaktere tıkla-sürükle ile ekranda istediğin yere
+  taşı (konum kaydedilir). Tek tıklama (sürüklemeden) = "su içtim".
+- **Fareyle üzerine gelince** sağ üst köşede üç simge belirir: **💤**
+  bildirimi 5 dakika erteler, **⚙** küçük bir ayarlar penceresi açar
+  (aralık, boyut, günlük hedef, duraklat, otomatik duraklama, ses,
+  başlangıçta çalıştır — hepsi widget'tan, tepsiye gitmeden), **✕**
+  widget'i gizler (tepsi menüsünden "Widget'i göster" ile geri
+  getirilebilir). Aralarında yanlışlıkla birbirine basmayı önlemek için
+  boşluk var; üstelik hangisine daha yakın tıklandıysa o seçilir.
+- **Kademeli kuruma**: karakterin rengi su içmedikçe yavaş yavaş canlı
+  mavi-mutludan soluk/kırmızımsı-kurumuşa geçer (parlaklık/nem izlenimi
+  de azalır), aniden değil sürekli/akıcı bir geçişle.
+- **İlerleme çubuğu**: Widget'in altında, bir sonraki hatırlatmaya kalan
+  süreyi gösteren küçük bir çubuk + geri sayım yazısı.
+- **Günlük hedef + seri (streak)**: Widget'te, geri sayımın üstünde
+  günlük kaç bardak içildiğini gösteren küçük bardak simgeleri satırı
+  (dolu/mavi = içildi, boş/soluk çerçeve = kaldı) — hedef 8'den
+  büyükse yer kısıtından dolayı "3/10 bardak" şeklinde metne döner.
+  Hedefe (varsayılan 8 bardak, ayarlardan değiştirilebilir) ulaşınca
+  karakter daha uzun/enerjik bir şekilde "sevinir" ve ayrıca bir
+  kutlama bildirimi gelir. Gece yarısını geçtiğinde (uygulama açık
+  kalsa bile) sayaç otomatik sıfırlanır, önceki gün hedefe ulaşıldıysa
+  seri (kaç gün üst üste hedefi tuttuğun) bir artar, tutulmadıysa
+  sıfırlanır. Seri sayısı ayarlar penceresinde görünür.
+- **Boşta/uzaktayken otomatik duraklama**: Klavye/fare 10 dakikadır
+  kullanılmadıysa hatırlatıcı "uzakta" durumuna geçip otomatik
+  duraklar (bildirim gelmez); geri dönünce sayaç sıfırlanıp normal
+  akışına devam eder, böylece bilgisayardan uzaktayken boş yere
+  bildirim birikmez. Ayarlardan kapatılabilir.
+- **Bildirimden hızlı erteleme**: Widget üzerindeki 💤 simgesi ya da
+  tepsi menüsündeki "5 dk ertele" ile bir sonraki hatırlatmayı 5 dakika
   geciktir.
-- **Ayarlarda 7 gunluk mini gecmis**: Ayarlar penceresinde son 7 gunun
-  ne kadar su icildigini gosteren kucuk bir cubuk grafik; hedefe
-  ulasilan gunler vurgulu renkte gorunur.
-- **Dil (Turkce / English)**: Ayarlar penceresinden dil degistirilebilir;
-  widget, tepsi menusu, ayarlar penceresi ve bildirim metinleri
-  (baslik/icerik) secilen dile gore gosterilir. Varsayilan Turkce.
-- **Tepsi (tray) simgesi**: Ayni maskot, kucuk boyutta, sistem
-  tepsisinde de durur; sag tikla menuden tum ayarlara erisilir.
-- **Aralik**: 15/30/45/60/90/120 dakika arasinda secim.
-- **Gunluk hedef**: 4/6/8/10/12/15 bardak arasinda secim.
-- **Duraklat/Devam et**, **Bildirim sesi ac/kapa**.
-- **Windows baslangicinda calistir**: Acilinca otomatik baslar.
-- Native Windows 10/11 toast bildirimi (winotify) ile hatirlatma; ayrica
-  sistem sesi (winsound) ile de bir "bip" calar - toast'un kendi sesi
-  bazen Windows'un bildirim ayarlari yuzunden (özellikle "Odaklanma
-  Yardimcisi"/oyun modu acikken) sessiz kalabildigi icin bu ikinci ses
-  yolu daha guvenilir.
+- **Ayarlarda 7 günlük mini geçmiş**: Ayarlar penceresinde son 7 günün
+  ne kadar su içildiğini gösteren küçük bir çubuk grafik; hedefe
+  ulaşılan günler vurgulu renkte görünür.
+- **Dil (Türkçe / English)**: Ayarlar penceresinden dil değiştirilebilir;
+  widget, tepsi menüsü, ayarlar penceresi ve bildirim metinleri
+  (başlık/içerik) seçilen dile göre gösterilir. Varsayılan Türkçe.
+- **Tepsi (tray) simgesi**: Aynı maskot, küçük boyutta, sistem
+  tepsisinde de durur; sağ tıkla menüden tüm ayarlara erişilir.
+- **Aralık**: 15/30/45/60/90/120 dakika arasında seçim.
+- **Günlük hedef**: 4/6/8/10/12/15 bardak arasında seçim.
+- **Duraklat/Devam et**, **Bildirim sesi aç/kapa**.
+- **Windows başlangıcında çalıştır**: Açılınca otomatik başlar.
+- Native Windows 10/11 toast bildirimi (`winotify`) ile hatırlatma; ayrıca
+  sistem sesi (`winsound`) ile de bir "bip" çalar — toast'un kendi sesi
+  bazen Windows'un bildirim ayarları yüzünden (özellikle "Odaklanma
+  Yardımcısı"/oyun modu açıkken) sessiz kalabildiği için bu ikinci ses
+  yolu daha güvenilir.
 
-## Calistirma (gelistirme)
+## Kullanım
+
+- Ekranda beliren maskota **tek tıkla** = su içtim (sayaç sıfırlanır,
+  günlük hedefe bir adım daha yaklaşılır).
+- Maskotu **sürükle** = konumunu değiştir.
+- Maskotun sağ üstündeki **💤** = bir sonraki hatırlatmayı 5 dakika
+  ertele, **⚙** = ayarlar, **✕** = widget'i gizle (uygulama arka
+  planda, tepsi simgesinden çalışmaya devam eder).
+- Tepsi simgesine **sağ tıkla** = tüm ayarlar (aralık, günlük hedef,
+  erteleme, duraklat, otomatik duraklama, widget'i tekrar göster, ses,
+  başlangıçta çalıştır, çıkış).
+
+Ayarlar (aralık, günlük hedef, widget konumu/boyutu, günlük sayaç,
+seri, geçmiş, vb.) `%APPDATA%\PixelDrop\config.json`
+dosyasında saklanır. (Uygulama eskiden "Su İçme Hatırlatıcı" adıyla
+biliniyordu — eski `%APPDATA%\SuIcmeHatirlatici\config.json` varsa
+ilk açılışta otomatik olarak yeni konuma bir kez kopyalanır, hiçbir
+veri kaybolmaz.)
+
+## Çalıştırma (geliştirme)
 
 ```
 pip install -r requirements.txt
 python main.py
 ```
 
-Konsol penceresi olmadan, arka planda sessizce calistirmak icin:
+Konsol penceresi olmadan, arka planda sessizce çalıştırmak için:
 
 ```
 pythonw main.py
 ```
 
-En kolay yol: `kur_ve_test_et.bat` dosyasina cift tikla — bagimliliklari
-kurar, bir test bildirimi gonderir ve uygulamayi baslatir.
+En kolay yol: `kur_ve_test_et.bat` dosyasına çift tıkla — bağımlılıkları
+kurar, bir test bildirimi gönderir ve uygulamayı başlatır.
 
-## Kullanim
+## .exe olarak paketleme
 
-- Ekranda beliren maskota **tek tikla** = su ictim (sayaç sifirlanir,
-  gunluk hedefe bir adim daha yaklasilir).
-- Maskotu **surukle** = konumunu degistir.
-- Maskotun sag ustundeki **💤** = bir sonraki hatirlatmayi 5 dakika
-  ertele, **⚙** = ayarlar, **✕** = widget'i gizle (uygulama arka
-  planda, tepsi simgesinden calismaya devam eder).
-- Tepsi simgesine **sag tikla** = tum ayarlar (aralik, gunluk hedef,
-  erteleme, duraklat, otomatik duraklama, widget'i tekrar goster, ses,
-  baslangicta calistir, cikis).
+`exe_olustur.bat` dosyasına çift tıkla (ya da terminalden çalıştır).
+Çıkan dosya: `dist\PixelDrop\PixelDrop.exe` (yanında birkaç destek
+dosyasıyla birlikte, tek bir klasör içinde).
 
-Ayarlar (aralik, gunluk hedef, widget konumu/boyutu, gunluk sayac,
-seri, gecmis, vb.) `%APPDATA%\PixelDrop\config.json`
-dosyasinda saklanir. (Uygulama eskiden "Su Icme Hatirlatici" adiyla
-biliniyordu - eski `%APPDATA%\SuIcmeHatirlatici\config.json` varsa
-ilk acilista otomatik olarak yeni konuma bir kez kopyalanir, hicbir
-veri kaybolmaz.)
+Paketledikten sonra "Windows başlangıcında çalıştır" seçeneğini tekrar
+aç/kapa ki başlangıç kaydı .py yerine .exe'yi göstersin.
 
-## Tek dosya .exe olarak paketleme
+### Windows SmartScreen ve antivirüs uyarısı
 
-`build_exe.bat` dosyasina cift tikla (ya da terminalden calistir).
-Cikan dosya: `dist\PixelDrop.exe`
+PyInstaller ile derlenen exe'ler (özellikle eskiden kullanılan tek
+dosyalık `--onefile` modu), çalışırken kendini geçici bir klasöre açması
+yüzünden Windows Defender, Chrome'un güvenli tarama özelliği ve Google
+tarafından sık sık yanlışlıkla "zararlı yazılım" olarak işaretlenir. Bu,
+PyInstaller kullanan hemen her projede karşılaşılan, iyi bilinen bir
+sorun — kodda gerçek bir kötü amaçlı davranış olduğu anlamına gelmez.
+Sebebi basit: **ücretsiz, imzasız bir açık kaynak projesinin kod imzalama
+sertifikası yok** (bu sertifikalar yıllık ücretli).
 
-Paketledikten sonra "Windows baslangicinda calistir" secenegini tekrar
-ac/kapa ki baslangic kaydi .py yerine .exe'yi gostersin.
+Eğer indirdiğin dosyada "Windows PC'nizi korudu" (SmartScreen) uyarısı
+görürsen:
+
+1. Uyarı penceresinde **"Diğer bilgiler" / "More info"** yazısına tıkla.
+2. Ardından çıkan **"Yine de çalıştır" / "Run anyway"** butonuna bas.
+
+Google/Chrome ya da Windows Defender belirli bir dosyayı yanlışlıkla
+engelliyorsa, "yanlış pozitif" olarak bildirebilirsin:
+[Microsoft dosya inceleme](https://www.microsoft.com/en-us/wdsi/filesubmission) ·
+[Google Safe Browsing hata bildirimi](https://safebrowsing.google.com/safebrowsing/report_error/)
+— inceleme genelde birkaç gün içinde sonuçlanır.
+
+Bunu azaltmak için ayrıca:
+
+- `exe_olustur.bat` artık `--onedir` (klasör) modunda ve `--noupx` ile
+  derliyor — tek dosyalık sürümden daha az yanlış pozitif alır.
+- Paylaşırken tek başına `PixelDrop.exe`yi değil, `dist\PixelDrop\`
+  klasörünün tamamını ZIP'leyip öyle paylaş.
+
+**Kaynak kod tamamen açık** — güvenmiyorsan indirmek yerine
+`exe_olustur.bat` ile kendi bilgisayarında kendi başına derleyebilirsin;
+bu şekilde ürettiğin exe de kendi makinende olduğu için hiçbir indirme
+uyarısı görmezsin.
 
 ## Notlar / mimari
 
-- Arayuz: `tkinter` (stdlib, ekstra kurulum gerekmez) ile seffaf,
-  cerçevesiz bir Toplevel penceresi. Karakterin piksel-art gorseli
-  calisma zamaninda Pillow ile ciziliyor (harici dosya yok).
+Kod `pixeldrop/` paketi altında modüllere ayrılmış durumda (kök dizindeki
+`main.py` artık sadece `pixeldrop.__main__`'ı çağıran ince bir başlatıcı —
+`python main.py` ve `exe_olustur.bat` eskisi gibi çalışmaya devam eder):
+
+```
+pixeldrop/
+├── __main__.py      # giriş noktası
+├── config.py        # config.json okuma/yazma, eski isimden göç, varsayılanlar
+├── i18n/             # tr.json / en.json çeviri dosyaları + yükleyici
+├── notify.py         # winotify + winsound bildirimleri
+├── core/
+│   ├── timer.py      # zamanlama / erteleme (saf fonksiyonlar)
+│   ├── tracker.py    # gün dönümü, hedef, seri, geçmiş (saf fonksiyonlar)
+│   ├── idle.py        # GetLastInputInfo sarmalayıcı
+│   └── startup.py     # Windows başlangıç kaydı
+└── ui/
+    ├── widget.py       # ana maskot penceresi
+    ├── settings.py     # ayarlar penceresi
+    ├── tray.py         # pystray entegrasyonu
+    └── mascot.py       # Pillow ile piksel-art çizim
+```
+
+- Arayüz: `tkinter` (stdlib, ekstra kurulum gerekmez) ile şeffaf,
+  çerçevesiz bir Toplevel penceresi. Karakterin piksel-art görseli
+  çalışma zamanında Pillow ile çiziliyor (harici dosya yok).
 - Tepsi simgesi: `pystray`, `run_detached()` ile tkinter'in ana
-  dongusunu bloklamadan calisir.
-- Zamanlama: ekstra thread/`sleep` dongusu yerine tkinter'in
-  `after()` cagrilari kullanilir (saniyede bir durum kontrolu, ~70ms'de
-  bir hafif "nefes alma" animasyonu) — boylece boşta CPU kullanimi
-  neredeyse sifira yakin kalir.
-- Bosta/uzaktayken otomatik duraklama, Windows'un `GetLastInputInfo`
-  API'siyle (stdlib `ctypes` uzerinden, ekstra kurulum gerekmez) son
-  klavye/fare girdisinden bu yana gecen sureyi olcer; Windows disinda
-  ya da API erisilemezse ozellik sessizce devre disi kalir.
-- Gunluk hedef/seri ve 7 gunluk gecmis, `config.json` icindeki
-  `history` alaninda (tarih -> icilen bardak) son 14 gun saklanarak
-  hesaplanir; gun donusu artik sadece baslangicta degil, her saniyelik
-  `_tick` kontrolunde de yapilir, boylece uygulama gece boyunca acik
-  kalsa da gece yarisinda dogru sifirlanir.
-- Diller `STRINGS` sozlugunde (main.py icinde, "tr"/"en") tutulur;
-  secim `config.json`'daki `language` alaninda saklanir. Widget/tepsi
-  metinleri her yenilendiginde guncel dili okur; ayarlar penceresindeki
-  sabit etiketler ise dil degisince pencere yeniden acilarak guncellenir.
+  döngüsünü bloklamadan çalışır.
+- Zamanlama: ekstra thread/`sleep` döngüsü yerine tkinter'in
+  `after()` çağrıları kullanılır (saniyede bir durum kontrolü, ~70ms'de
+  bir hafif "nefes alma" animasyonu) — böylece boşta CPU kullanımı
+  neredeyse sıfıra yakın kalır.
+- Boşta/uzaktayken otomatik duraklama, Windows'un `GetLastInputInfo`
+  API'siyle (stdlib `ctypes` üzerinden, ekstra kurulum gerekmez) son
+  klavye/fare girdisinden bu yana geçen süreyi ölçer; Windows dışında
+  ya da API erişilemezse özellik sessizce devre dışı kalır.
+- Günlük hedef/seri ve 7 günlük geçmiş, `config.json` içindeki
+  `history` alanında (tarih → içilen bardak) son 14 gün saklanarak
+  hesaplanır; gün dönüşü `core/tracker.py` içinde saf bir fonksiyon
+  olarak yaşar (bugünün tarihi parametre olarak alınır, `datetime.now()`
+  çağrılmaz) ve `_tick` her saniye bunu kontrol eder — uygulama gece
+  boyunca açık kalsa da gece yarısında doğru sıfırlanır.
+- Diller artık koddan ayrı, `pixeldrop/i18n/tr.json` ve `en.json`
+  dosyalarında tutulur; seçim `config.json`'daki `language` alanında
+  saklanır. Widget/tepsi metinleri her yenilendiğinde güncel dili okur;
+  ayarlar penceresindeki sabit etiketler ise dil değişince pencere
+  yeniden açılarak güncellenir.
+- Tek bir `__version__` (`pixeldrop/__init__.py`) hem ayarlar
+  penceresinde hem tepsi ikonunun ipucunda görünür.
+- `ruff` + `mypy`, `pyproject.toml` ile yapılandırılmış durumda; kurulum
+  için `pip install -r requirements-dev.txt`.
+- `core/timer.py` ve `core/tracker.py`'deki saf fonksiyonlar `pytest`
+  ile test ediliyor (gün dönümü, seri hesabı, geçmiş budama, bozuk
+  config'ten kurtarma, eski isimden göç). Testleri çalıştırmak için:
+  `pytest` (repo kökünde, `requirements-dev.txt` kurulduktan sonra).
+
+## Katkıda bulunma
+
+Hata bildirimi ya da özellik önerisi için
+[Issues](https://github.com/OrhuunA/PixelDrop/issues) sekmesinden yeni
+bir kayıt açabilirsin — hazır şablonlar gerekli bilgileri (Windows
+sürümü, adımlar, vb.) soracak. Geliştirme yönündeki plan için
+[yol haritasına](pixeldropyolharitasi.md) göz atabilirsin.
+
+## Lisans
+
+[MIT](LICENSE)

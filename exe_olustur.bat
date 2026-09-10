@@ -60,7 +60,7 @@ timeout /t 1 /nobreak >nul
 
 echo.
 echo Konsolsuz .exe olusturuluyor ^(klasor modu - bu birkac dakika surebilir^)...
-%PYCMD% -m PyInstaller --onedir --noconsole --noupx --name PixelDrop main.py
+%PYCMD% -m PyInstaller --onedir --noconsole --noupx --name PixelDrop --add-data "pixeldrop\i18n;pixeldrop\i18n" main.py
 if errorlevel 1 (
     echo.
     echo HATA: PyInstaller derlemesi basarisiz oldu. Yukaridaki hatayi

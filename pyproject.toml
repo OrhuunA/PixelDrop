@@ -1,0 +1,37 @@
+[project]
+name = "pixeldrop"
+# Not: bu deger sadece paketleme/PyPI metadatasi icindir. Uygulamanin tek
+# gercek surum kaynagi pixeldrop/__init__.py icindeki __version__'dur
+# (bkz. pixeldropyolharitasi.md, madde 3.5) - burasi elle senkron tutulur.
+version = "1.0.0"
+description = "Ekranda yasayan piksel-art su damlasi maskotuyla su icmeyi hatirlatan hafif Windows masaustu araci"
+requires-python = ">=3.9"
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+
+[tool.ruff.lint]
+# Varsayilan pyflakes (F) + pycodestyle (E) kurallari yeterli; proje
+# genelinde bilerek kullanilan `except Exception: pass` (sessiz basarisiz
+# olma) deseni ve Turkce yorumlardaki uzun satirlar icin asiri katı ek
+# kural setlerine (ör. bugbear) simdilik gerek yok.
+select = ["E", "F", "W"]
+ignore = [
+    "E501",  # satir uzunlugu - line-length zaten 110'a cikarildi, kalanlar yorum/i18n metni
+    "E702",  # ui/mascot.py'deki yuz cizimi: ayni satirdaki birkac _px() cagrisi
+             # (noktali virgulle) grid duzenini daha okunur tutuyor - bilincli tercih
+]
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true  # pystray/winotify icin tip stub'u yok
+warn_unused_ignores = true
+exclude = ["^build/", "^dist/", "^tests/"]
+
+[[tool.mypy.overrides]]
+module = "pixeldrop.ui.*"
+# UI katmani tkinter/pystray'e yogun bagimli ve dinamik ozellik atamalari
+# (self.foo = ...) kullaniyor; siki tip denetimi core/ ve config/i18n
+# katmanlarinda daha degerli.
+ignore_errors = true
